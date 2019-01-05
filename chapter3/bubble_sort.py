@@ -4,13 +4,16 @@ def bubble_sort(a, n):
     res = 0
     while flag:
         flag = 0
-        for j in range(n -1, 0, -1):
+        i = 0
+        for j in range(n -1, i, -1):
             if a[j] < a[j - 1]:
                 temp = a[j]
                 a[j] = a[j - 1]
                 a[j - 1] = temp
                 res += 1
                 flag = 1
+        i += 1
+
     print(a)
     print(res)
 
