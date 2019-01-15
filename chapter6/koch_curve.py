@@ -8,13 +8,13 @@ class Point:
         self.y = y
 
 
-def koch(d: int, p1: Point, p2: Point):
+def koch(d: int, p1: Point, p2: Point) -> None:
     if d == 0:
         return
     s = Point((p1.x * 2.0 + p2.x * 1.0) / 3.0, (p1.y * 2.0 + p2.y * 1.0) / 3.0)
-    t = Point((p1.x * 1.0 + p2.x + 2.0) / 3.0, (p1.y * 1.0 + p2.y * 2.0) / 3.0)
-    ux = (cos(th) - sin(th)) * (t.x - s.x) + s.x
-    uy = (sin(th) + cos(th)) * (t.y - s.y) + s.y
+    t = Point((p1.x * 1.0 + p2.x * 2.0) / 3.0, (p1.y * 1.0 + p2.y * 2.0) / 3.0)
+    ux = (t.x - s.x) * cos(th) - (t.y - s.y) * sin(th) + s.x
+    uy = (t.x - s.x) * sin(th) + (t.y - s.y) * cos(th) + s.y
     u = Point(ux, uy)
     koch(d - 1, p1, s)
     print("{0} {1}".format(s.x, s.y))
