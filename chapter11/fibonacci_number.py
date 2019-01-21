@@ -1,6 +1,6 @@
 from typing import List
 
-dp: List[int] = None
+dp: List[int]
 
 
 def fibonacci(n: int) -> int:
