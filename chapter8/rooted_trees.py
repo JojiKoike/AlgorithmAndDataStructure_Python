@@ -21,7 +21,7 @@ def print_result(i: int) -> None:
     # Parent ID
     print("parent = {0}".format(T[i].parent), end=", ")
     # Node Depth
-    print("depth = {0}".format(D[i]))
+    print("depth = {0}".format(D[i]), end=", ")
     # Node Type
     node_type: str
     if T[i].parent == NIL:
@@ -47,7 +47,7 @@ def calc_depth_rec(u: int, p: int) -> None:
     D[u] = p
     if T[u].right != NIL:
         calc_depth_rec(T[u].right, p)
-    elif T[u].left != NIL:
+    if T[u].left != NIL:
         calc_depth_rec(T[u].left, p + 1)
 
 
