@@ -7,10 +7,11 @@ class Node:
         self.parent = parent
         self.right = right
 
-root: Node
-NIL: Node
+root: Any = None
+NIL: Any = None
 
 def insert(k: int) -> None:
+    global root, NIL
     y: Node = NIL   # For Parent
     x: Node = root  # For Next Node
     z: Node = Node(k, NIL, NIL, NIL)
@@ -28,7 +29,7 @@ def insert(k: int) -> None:
     if y == NIL:
         root = z
     else:
-        if z.key < y.left.key:
+        if z.key < y.key:
             y.left = z
         else:
             y.right = z
@@ -49,7 +50,6 @@ def preorder(u: Node) -> Node:
     preorder(u.left)
     preorder(u.right)
 
-
 n: int = int(input())
 for i in range(n):
     inputs: List[str] = input().split(" ")
@@ -61,6 +61,3 @@ for i in range(n):
         print()
         preorder(root)
         print()
-
-
-
