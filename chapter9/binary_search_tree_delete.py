@@ -8,6 +8,7 @@ class Node(object):
         self.parent = parent
         self.right = right
 
+
 root: Optional[Node] = None
 NIL: Optional[Node] = None
 
@@ -121,5 +122,3 @@ for i in range(n):
             print()
             preorder(root)
             print()
-
-
