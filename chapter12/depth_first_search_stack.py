@@ -19,7 +19,8 @@ color: List[Color] = [Color.WHITE for i in range(n + 1)]
 nt: List[int] = [0 for i in range(n)]
 for adj in adjs:
     for i in range(2, 2 + adj[1]):
-        m[adj[0] - 1][adj[i] - 1] = 1
+        m[adj[0] - 1][adj[i] - 1] = True
+
 
 def dfs() -> None:
     # Solve
