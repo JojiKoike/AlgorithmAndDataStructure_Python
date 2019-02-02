@@ -8,18 +8,7 @@ class Color(Enum):
     BLACK: int = 3
 
 
-n: int = int(input())
-d: List[int] = [0 for i in range(n)]
-f: List[int] = [0 for i in range(n)]
-color: List[Color] = [Color.WHITE for i in range(n)]
 time: int = 0
-adjs: List[List[int]] = [list(map(int, input().split())) for i in range(n)]
-m: List[List[bool]] = [[False for j in range(n)] for i in range(n)]
-color: List[Color] = [Color.WHITE for i in range(n + 1)]
-nt: List[int] = [0 for i in range(n)]
-for adj in adjs:
-    for i in range(2, 2 + adj[1]):
-        m[adj[0] - 1][adj[i] - 1] = True
 
 
 def dfs() -> None:
@@ -34,7 +23,7 @@ def dfs() -> None:
 
 
 def dfs_visit(k: int) -> None:
-    global nt, time, d, f, n, color
+    global time
     nt = [0 for i in range(n)]
 
     stack: List[int] = []
@@ -44,7 +33,7 @@ def dfs_visit(k: int) -> None:
     d[k] = time
 
     while len(stack) > 0:
-        u: int = stack.pop(len(stack) - 1)
+        u: int = stack[len(stack) - 1]
         v: int = next(u)
         if v != -1:
             if color[v] == Color.WHITE:
@@ -52,16 +41,31 @@ def dfs_visit(k: int) -> None:
                 time += 1
                 d[v] = time
                 stack.append(v)
-            else:
-                stack.pop(len(stack) - 1)
-                color[v] = Color.BLACK
-                time += 1
-                f[v] = time
+        else:
+            stack.pop()
+            color[u] = Color.BLACK
+            time += 1
+            f[u] = time
 
 
 def next(u: int) -> int:
-    global nt, n
     for i in range(nt[u], n):
         nt[u] = i + 1
         if m[u][i]:
             return i
+    return -1
+
+
+n: int = int(input())
+d: List[int] = [0 for i in range(n)]
+f: List[int] = [0 for i in range(n)]
+color: List[Color] = [Color.WHITE for i in range(n)]
+time = 0
+adjs: List[List[int]] = [list(map(int, input().split())) for i in range(n)]
+m: List[List[bool]] = [[False for j in range(n)] for i in range(n)]
+color: List[Color] = [Color.WHITE for i in range(n)]
+nt: List[int] = [0 for i in range(n)]
+for adj in adjs:
+    for i in range(2, 2 + adj[1]):
+        m[adj[0] - 1][adj[i] - 1] = True
+dfs()
