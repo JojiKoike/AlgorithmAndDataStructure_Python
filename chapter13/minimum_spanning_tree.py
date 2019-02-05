@@ -27,14 +27,15 @@ def prim() -> int:
         color[u] = Color.BLACK
         for v in range(n):
             if color[v] != Color.BLACK and costtable[u][v] != INFTY:
-                d[v] = costtable[u][v]
-                p[v] = u
-                color[v] = Color.GRAY
-        sum: int = 0
-        for i in range(n):
-            if p[i] != -1:
-                sum += costtable[i][p[i]]
-        return sum
+                if costtable[u][v] < d[v]:
+                    d[v] = costtable[u][v]
+                    p[v] = u
+                    color[v] = Color.GRAY
+    sum: int = 0
+    for i in range(n):
+        if p[i] != -1:
+            sum += costtable[i][p[i]]
+    return sum
 
 
 n: int = int(input())
@@ -46,4 +47,4 @@ for l in range(n):
     costs: List[int] = list(map(int, input().split()))
     for m in range(n):
         costtable[l][m] = INFTY if costs[m] == -1 else costs[m]
-prim()
+print(prim())
