@@ -30,7 +30,8 @@ def dijkstra() -> None:
         dx: int
         u, dx = heapq.heappop(pq)
         color[u] = Color.BLACK
-        if d[u] < dx: continue
+        if d[u] < dx:
+            continue
         for i in range(len(adjs[u])):
             e: Edge = heapq.heappop(adjs[i])
             if color[e.v] == Color.BLACK:
