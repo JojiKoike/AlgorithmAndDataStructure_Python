@@ -36,6 +36,7 @@ def dijkstra() -> None:
                 continue
             if d[u] + e.c < d[e.v]:
                 d[e.v] = d[u] + e.c
+                print("d[{0}] = {1}".format(e.v, d[e.v]))
                 heapq.heappush(pq, (d[e.v], e.v))
                 color[e.v] = Color.GRAY
     for i in range(n):
