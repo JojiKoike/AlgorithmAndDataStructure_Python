@@ -16,9 +16,6 @@ class Edge(object):
         self.v = v
         self.c = c
 
-    def __lt__(self, other):
-        return self.c < other.c
-
 
 def dijkstra() -> None:
     pq: List[Tuple[int, int]] = []
@@ -28,16 +25,17 @@ def dijkstra() -> None:
     while len(pq) > 0:
         u: int
         dx: int
-        u, dx = heapq.heappop(pq)
+        dx, u = heapq.heappop(pq)
         color[u] = Color.BLACK
+        print("d[{0}] = {1} dx = {2}".format(u, d[u], dx))
         if d[u] < dx:
             continue
         for i in range(len(adjs[u])):
-            e: Edge = heapq.heappop(adjs[i])
+            e: Edge = adjs[u][i]
             if color[e.v] == Color.BLACK:
                 continue
             if d[u] + e.c < d[e.v]:
-                d[e.v] = d[u] + edge.c
+                d[e.v] = d[u] + e.c
                 heapq.heappush(pq, (d[e.v], e.v))
                 color[e.v] = Color.GRAY
     for i in range(n):
@@ -53,6 +51,6 @@ for i in range(n):
     h: List[Edge] = []
     for j in range(1, g[1] + 1):
         edge: Edge = Edge(g[2 * j], g[2 * j + 1])
-        heapq.heappush(h, edge)
+        h.append(edge)
     adjs[i] = h
 dijkstra()
